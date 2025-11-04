@@ -1,42 +1,59 @@
-# 🚗 Self-Driving RC Car
+# Project: 3D-Printed Autonomous RC Vehicle
 
-Hey everyone! I'm super excited to share a project I've been pouring a ton of time into: a fully self-driving RC car that I designed and built completely from scratch.
-
-This project was a massive learning experience for me, mixing pretty much everything I love: **3D modeling**, **3D printing**, **embedded programming**, and **computer vision**.
+This project details the design, fabrication, and implementation of a small-scale, self-driving RC car. The vehicle integrates **3D modeling**, **3D printing**, **embedded programming**, and **computer vision** to achieve autonomous navigation and obstacle avoidance.
 
 ---
 
-## 🧠 The Idea
+## 1. Project Objective
 
-My main goal was to build a small-scale car that could *actually* drive itself. No manual remote control needed. I wanted it to use a camera and a bunch of sensors to navigate a path and, most importantly, not smack into my walls.
+The primary objective was to engineer a fully autonomous vehicle capable of self-navigation using real-time camera input and sensor data.
 
-Along the way, I ended up designing and 3D-printing the entire body, wiring up all the electronics from scratch, and writing all the code to make it move.
-
-I even got to show it off at a local maker fair recently, which was an awesome experience. It got some great feedback, which made all the late-night troubleshooting worth it!
+The project scope encompassed the complete ground-up design of the chassis, integration of all electronics, and development of the software stack. This includes algorithms for movement, obstacle detection, and a remote teleoperation interface. The completed vehicle was successfully demonstrated at a local maker fair.
 
 ---
 
-## What Does It Do?
+## 2. Key Features and Subsystems
 
-It started as just an idea, but it ended up with a bunch of features I'm really proud of:
-
-* **Custom 3D-Printed Body:** I designed the whole chassis, wheel mounts, and sensor brackets in CAD (I used a mix of Fusion 360 and SolidWorks) and printed everything on my desktop 3D printer.
-* **Real Autonomous Driving:** This was the hard part! I'm using OpenCV and a little bit of TensorFlow to process the camera feed. This lets the car follow lines on the floor and spot obstacles in its path.
-* **Sensor Fusion:** To make good decisions, the car can't just "see." I also added ultrasonic sensors and IR sensors to help it measure distances and avoid things the camera might miss.
-* **A "Split-Brain" System:** I'm using a **Raspberry Pi** as the high-level "brain" to run the computer vision and make the big decisions (like "turn left!"). The Pi then sends simple commands to an **Arduino**, which acts as the "muscle" to handle the low-level, real-time control of the motors and sensors.
-* **A Web Control Panel:** For testing (and just for fun), I built a simple web app using Flask. It lets me manually control the car from my phone or laptop and see a live stream from the car's camera.
+* **Custom 3D-Printed Chassis:** All structural components were designed in CAD software (Fusion 360/SolidWorks) and fabricated using a desktop 3D printer.
+* **Autonomous Navigation:** Utilizes computer vision (OpenCV) and machine learning (TensorFlow) for path following and obstacle detection.
+* **Multi-Sensor Fusion:** Integrates data from ultrasonic sensors, a camera module, and IR sensors to make informed real-time navigation decisions.
+* **Hierarchical Control System:** A Raspberry Pi manages high-level vision processing and control logic, while an Arduino handles low-level, real-time motor and sensor I/O.
+* **Web-Based Teleoperation:** A lightweight Flask web application provides an interface for manual control and live video feedback.
+* **Algorithm Validation:** The system was tested and tuned under various indoor and outdoor conditions to optimize performance.
 
 ---
 
-## How It All Fits Together
+## 3. Hardware Components
 
-The "split-brain" approach with the Pi and Arduino is the core of the whole system.
+| Component | Description |
+|---|---|
+| Raspberry Pi 4 | Primary compute module; runs vision processing and main logic |
+| Arduino Uno | Real-time controller for motors and sensors |
+| Pi Camera | Provides live video feed for computer vision |
+| Ultrasonic Sensors | Detects obstacles for navigation and collision avoidance |
+| DC Motors + Driver | Provides vehicle propulsion |
+| 3D Printed Chassis | Custom-designed, lightweight vehicle frame |
+| Battery Pack | Provides portable power to all systems |
 
-The **Raspberry Pi 4** runs the heavy-duty Python scripts. It captures the video, runs it through OpenCV to find lanes or obstacles, and then decides the best course of action.
+---
 
-Once it makes a decision, it sends a simple command (like `forward`, `stop`, or `turn_left`) over a serial connection to the **Arduino Uno**. The Arduino, running a much simpler C++ script, is dedicated to one job: taking those commands and translating them into the correct electrical signals for the motor driver. It also constantly pings the ultrasonic sensors and can react instantly if something is *right* in front of the car, faster than the Pi could.
+## 4. Software and Technology Stack
 
-Here are a couple of diagrams I drew up to plan it all out:
+| Type | Tools |
+|---|---|
+| Programming | Python, C++ |
+| Frameworks | OpenCV, TensorFlow, Flask |
+| Microcontroller | Arduino IDE |
+| 3D Modeling | Fusion 360 / SolidWorks |
+| OS | Raspbian |
+
+---
+
+## 5. System Architecture
+
+The system employs a hierarchical control architecture. The Raspberry Pi serves as the high-level "brain," handling computationally intensive tasks like image processing and decision-making.
+
+It communicates commands via serial to the Arduino, which functions as a low-level, real-time controller. The Arduino directly interfaces with the motor drivers and sensors, ensuring rapid response to immediate obstacles and precise movement control.
 
 ![System architecture diagram 1](https://user-images.githubusercontent.com/61593351/234959681-5ce77418-8f70-4f21-b785-7d2b3a26c022.jpg)
 ![System architecture diagram 2](https://user-images.githubusercontent.com/61593351/234959682-025a8b70-5407-4e3d-9fa3-17e317b8f39d.jpg)
@@ -45,54 +62,16 @@ Here are a couple of diagrams I drew up to plan it all out:
 
 ---
 
-## The "Tech"
-
-For anyone curious, here's a quick breakdown of the main parts and software I used.
-
-### The Hardware Guts
-| Component | What I Used It For |
-|------------|-------------|
-| Raspberry Pi 4 | The "brains" — runs computer vision & main logic |
-| Arduino Uno | The "muscles" — handles motors & sensors |
-| Pi Camera | The "eyes" — provides the live video feed |
-| Ultrasonic Sensors | Detects obstacles (like walls) |
-| DC Motors + Driver | Powers the wheels |
-| 3D Printed Chassis | My custom-designed frame |
-| Battery Pack | To make it all portable! |
-
-### The Software & Tools
-| Type | Tools I Used |
-|------|-------|
-| Programming | Python (for the Pi) and C++ (for the Arduino) |
-| Frameworks | OpenCV, TensorFlow, Flask |
-| Microcontroller | Arduino IDE |
-| 3D Modeling | Fusion 360 / SolidWorks |
-| OS | Raspbian (now Raspberry Pi OS) |
-
----
-
-## The Build Process in Pictures
-
-Of course, no project post is complete without photos! Here’s a look at how it went from a digital model to a real, working car.
+## 6. Design and Fabrication Process
 
 ### 3D Modeling & Printing
-Here are some renders of the chassis and parts right out of the CAD software.
-
 ![CAD model 1](https://user-images.githubusercontent.com/61593351/234954546-81d05d14-f48e-445b-944e-dd89eae37795.png)
 ![CAD model 2](https://user-images.githubusercontent.com/61593351/234954666-75bada8b-ab2f-4ef3-98a2-f47a665b28fd.png)
 ![CAD model 3](https://user-images.githubusercontent.com/61593351/234954703-5c1405e0-cd41-4b11-9809-0a57ad07e7ec.png)
 ![CAD model 4](https://user-images.githubusercontent.com/61593351/234954767-99e8d6a2-087d-4da6-a888-1c65e8f8b339.png)
 
 ### Assembly and Final Build
-And here's the fun part—putting it all together. It took a *lot* of trial and error to get the wiring clean and make sure everything fit inside the printed chassis.
-
 ![Assembly photo 1](https://user-images.githubusercontent.com/61593351/234965234-1612fecd-6c52-463c-81a3-a1c519d5ea66.png)
 ![Assembly photo 2](https://user-images.githubusercontent.com/61593351/234964802-b0f567b3-ed56-4c2c-b23f-d97c73a40e41.png)
 ![Assembly photo 3](https://user-images.githubusercontent.com/61593351/234964835-19576ef3-2d48-4e26-b0c3-4a4c687aa222.png)
 ![Assembly photo 4](https://user-images.githubusercontent.com/61593351/234964896-308baf55-2f78-4604-846b-6920a8dfa9ee.png)
-
----
-
-This was one of the most challenging and rewarding projects I've ever done. Seeing it finally drive across the room all by itself was an incredible feeling.
-
-Thanks for checking it out! Let me know what you think.
