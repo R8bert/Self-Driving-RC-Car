@@ -6,9 +6,7 @@ This project details the design, fabrication, and implementation of a small-scal
 ## 1. Project Objective
 
 The primary objective was to engineer a fully autonomous vehicle capable of self-navigation using real-time camera input and sensor data.
-
 The project scope encompassed the complete ground-up design of the chassis, integration of all electronics, and development of the software stack. This includes algorithms for movement, obstacle detection, and a remote teleoperation interface. The completed vehicle was successfully demonstrated at a local maker fair.
-
 ---
 
 ## 2. Key Features and Subsystems
@@ -19,7 +17,6 @@ The project scope encompassed the complete ground-up design of the chassis, inte
 * **Hierarchical Control System:** A Raspberry Pi manages high-level vision processing and control logic, while an Arduino handles low-level, real-time motor and sensor I/O.
 * **Web-Based Teleoperation:** A lightweight Flask web application provides an interface for manual control and live video feedback.
 * **Algorithm Validation:** The system was tested and tuned under various indoor and outdoor conditions to optimize performance.
-
 ---
 
 ## 3. Hardware Components
