@@ -1,7 +1,6 @@
 # Project: 3D-Printed Autonomous RC Vehicle
 
 This project details the design, fabrication, and implementation of a small-scale, self-driving RC car. The vehicle integrates **3D modeling**, **3D printing**, **embedded programming**, and **computer vision** to achieve autonomous navigation and obstacle avoidance.
-
 ---
 
 ## 1. Project Objective
@@ -52,7 +51,6 @@ The project scope encompassed the complete ground-up design of the chassis, inte
 ## 5. System Architecture
 
 The system employs a hierarchical control architecture. The Raspberry Pi serves as the high-level "brain," handling computationally intensive tasks like image processing and decision-making.
-
 It communicates commands via serial to the Arduino, which functions as a low-level, real-time controller. The Arduino directly interfaces with the motor drivers and sensors, ensuring rapid response to immediate obstacles and precise movement control.
 
 ![System architecture diagram 1](https://user-images.githubusercontent.com/61593351/234959681-5ce77418-8f70-4f21-b785-7d2b3a26c022.jpg)
